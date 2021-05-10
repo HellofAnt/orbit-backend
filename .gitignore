@@ -1,6 +1,6 @@
 .idea
 /orbit_venv
-my_settings.py
+orbit/my_settings.py
 
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
