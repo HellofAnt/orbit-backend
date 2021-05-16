@@ -15,7 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Orbit API",
+        default_version="V1",
+        description="Description",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="jundo1302@gmail.com"),
+        license=openapi.License(name="Orbit License"),
+    ),
+    validators=['flex'],
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('swagger<str:format>', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    url('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url('docs/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
